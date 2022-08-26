@@ -10,4 +10,11 @@ Design from here: [DevChallenges](https://devchallenges.io/challenges/wP0LbGgEeK
   - Each card has `title`, `image` (optional) ,`owner`, `desc`, `assignedTo`, `dueDate` and `labels` associated with it.  
   - To add a new card there should be a button at the bottom of each column.
   - Cards can be moved by only either by `owner` or `assignedTo` users
+  
+  ## Packages Needed
+1. MUI
+npm install @mui/material @emotion/react @emotion/styled @mui/icons-material
+2. Routes
+3. React DnD
+
  
