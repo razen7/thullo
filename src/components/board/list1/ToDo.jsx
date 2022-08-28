@@ -5,7 +5,7 @@ import ListTitle from '../ListTitle'
 export default function ToDo() {
     return (
         <>
-            <Paper elevation={2}>
+            <Paper elevation={1} >
                 <ListTitle title="ToDo" />
                 {/* 
                 {card}

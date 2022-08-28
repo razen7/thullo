@@ -1,27 +1,32 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { BASE_URL } from '../../constants';
-import { useNavigate } from 'react-router-dom';
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { BASE_URL } from "../../constants";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
     return (
-        <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © '}
+        <Typography
+            variant="body2"
+            color="text.secondary"
+            align="center"
+            {...props}
+        >
+            {"Copyright © "}
             <Link color="inherit" href="https://mui.com/">
                 Your Website
-            </Link>{' '}
+            </Link>{" "}
             {new Date().getFullYear()}
-            {'.'}
+            {"."}
         </Typography>
     );
 }
@@ -30,10 +35,10 @@ const theme = createTheme();
 
 export default function SignUp() {
     const goTo = useNavigate();
-    const [nameErr, setNameErr] = React.useState('');
-    const [emailErr, setEmailErr] = React.useState('');
-    const [passwordErr, setPasswordErr] = React.useState('');
-    const [cPasswordErr, setCPasswordErr] = React.useState('');
+    const [nameErr, setNameErr] = React.useState("");
+    const [emailErr, setEmailErr] = React.useState("");
+    const [passwordErr, setPasswordErr] = React.useState("");
+    const [cPasswordErr, setCPasswordErr] = React.useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -43,48 +48,49 @@ export default function SignUp() {
         const password = data.get("password");
         const confirm_password = data.get("confirm_password");
         if (name.length < 4) {
-            setNameErr('Name must be atleast 4 characters');
+            setNameErr("Name must be atleast 4 characters");
             return;
         }
         if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-            setEmailErr('Invalid Email');
+            setEmailErr("Invalid Email");
             return;
         }
         if (password.length < 6) {
-            setPasswordErr('Password must be atleast 6 characters long');
+            setPasswordErr("Password must be atleast 6 characters long");
             return;
         }
         if (password !== confirm_password) {
-            setCPasswordErr('Passwords do not match');
+            setCPasswordErr("Passwords do not match");
             return;
         }
-        setNameErr('');
-        setEmailErr('');
-        setPasswordErr('');
-        setCPasswordErr('');
+        setNameErr("");
+        setEmailErr("");
+        setPasswordErr("");
+        setCPasswordErr("");
 
         const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 name,
                 email,
                 password,
                 confirmPassword: confirm_password,
-            })
+            }),
         };
-        fetch(BASE_URL + 'auth/signup', requestOptions)
-            .then(async (response) => {
+        fetch(BASE_URL + "auth/signup", requestOptions).then(
+            async (response) => {
                 // let responseText = await response.text();
-                let data=await response.json();
+                let data = await response.json();
                 if (response.status !== 201) {
                     alert(data.message);
                     return;
                 } else {
                     alert(data.message);
-                    goTo('/');
+                    goTo("/");
                 }
-            })
+            }
+        );
     };
 
     return (
@@ -94,18 +100,23 @@ export default function SignUp() {
                 <Box
                     sx={{
                         marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
                     }}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                    <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         Sign up
                     </Typography>
-                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                    <Box
+                        component="form"
+                        noValidate
+                        onSubmit={handleSubmit}
+                        sx={{ mt: 3 }}
+                    >
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <TextField
