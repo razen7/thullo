@@ -3,7 +3,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Box, Container, Stack } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import CircularProgress from "@mui/material/CircularProgress";
-import ToDo from "./list1/ToDo";
+import ToDo from "./lists/ToDo";
 import { useNavigate } from "react-router-dom";
 
 const theme = createTheme({
