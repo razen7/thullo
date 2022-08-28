@@ -6,7 +6,7 @@ export default function ToDo() {
     return (
         <>
             <Paper elevation={1} >
-                <ListTitle title="To Do" color="#fce3cf" />
+                <ListTitle title="Completed" color="#cffcd5" />
                 {/* 
                 {card}
                 <Inputplace onAddoredit={this.onAddoredit} /> */}
