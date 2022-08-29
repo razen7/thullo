@@ -17,7 +17,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { Stack } from "@mui/system";
 
-export default function AddToDo({ open, user, list, handleClose }) {
+export default function AddCompleted({ open, user, list, handleClose }) {
     const [checked, setChecked] = useState([]);
     const [titleError, setTitleError] = useState("");
     const [descError, setDescError] = useState("");
@@ -49,10 +49,10 @@ export default function AddToDo({ open, user, list, handleClose }) {
         const description = data.get("description");
         const labels = data.get("labels");
         const image = data.get("image");
-        data.append("assignedTo", checked);
+        if (checked) data.append("assignedTo", checked);
         data.append("dueDate", date);
         data.append("owner", user.id);
-        data.append("status", "To Do");
+        data.append("status", "Completed");
         console.log(title, description, labels, checked, date, image);
 
         if (title.length < 4) {
@@ -69,8 +69,8 @@ export default function AddToDo({ open, user, list, handleClose }) {
 
         const requestOptions = {
             method: "POST",
-            body: data
-        }
+            body: data,
+        };
 
         try {
             const response = await fetch(
@@ -89,11 +89,12 @@ export default function AddToDo({ open, user, list, handleClose }) {
     return (
         <Dialog open={open} onClose={handleClose}>
             <form onSubmit={handleSubmit}>
-                <DialogTitle>Add new To Do task</DialogTitle>
+                <DialogTitle>Add new Completed task</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        To Do tasks are tasks are approved but have yet to be
-                        started.
+                        Completed tasks have gone through multiple editing and
+                        revisions to pass the standards of the company and
+                        client.
                     </DialogContentText>
                     <TextField
                         autoFocus

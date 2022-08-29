@@ -49,10 +49,10 @@ export default function AddToDo({ open, user, list, handleClose }) {
         const description = data.get("description");
         const labels = data.get("labels");
         const image = data.get("image");
-        data.append("assignedTo", checked);
+        if (checked) data.append("assignedTo", checked);
         data.append("dueDate", date);
         data.append("owner", user.id);
-        data.append("status", "To Do");
+        data.append("status", "In Progress");
         console.log(title, description, labels, checked, date, image);
 
         if (title.length < 4) {
@@ -69,8 +69,8 @@ export default function AddToDo({ open, user, list, handleClose }) {
 
         const requestOptions = {
             method: "POST",
-            body: data
-        }
+            body: data,
+        };
 
         try {
             const response = await fetch(
@@ -89,11 +89,11 @@ export default function AddToDo({ open, user, list, handleClose }) {
     return (
         <Dialog open={open} onClose={handleClose}>
             <form onSubmit={handleSubmit}>
-                <DialogTitle>Add new To Do task</DialogTitle>
+                <DialogTitle>Add new In Progress task</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        To Do tasks are tasks are approved but have yet to be
-                        started.
+                        In Progress tasks currently undertaken by the owner -
+                        and potentially other members - but are not yet done.
                     </DialogContentText>
                     <TextField
                         autoFocus
