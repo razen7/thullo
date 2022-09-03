@@ -22,6 +22,7 @@ export default function AddToDo({ open, user, list, handleClose }) {
     const [titleError, setTitleError] = useState("");
     const [descError, setDescError] = useState("");
     const [date, setDate] = useState(Date.now());
+    // console.log(checked)
 
     const handleToggle = (input) => {
         const currentIndex = checked.indexOf(input);
@@ -49,11 +50,12 @@ export default function AddToDo({ open, user, list, handleClose }) {
         const description = data.get("description");
         const labels = data.get("labels");
         const image = data.get("image");
-        data.append("assignedTo", checked);
+        data.append("assignedTo", JSON.stringify(checked));
         data.append("dueDate", date);
         data.append("owner", user.id);
         data.append("status", "To Do");
         console.log(title, description, labels, checked, date, image);
+        console.log(data);
 
         if (title.length < 4) {
             setTitleError("Title should be at least 4 characters long.");
@@ -74,7 +76,7 @@ export default function AddToDo({ open, user, list, handleClose }) {
 
         try {
             const response = await fetch(
-                "https://thullo-backend.herokuapp.com/tasks",
+                "http://localhost:8000/tasks",
                 requestOptions
             );
             const json = await response.json();

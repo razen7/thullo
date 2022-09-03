@@ -49,7 +49,7 @@ export default function AddToDo({ open, user, list, handleClose }) {
         const description = data.get("description");
         const labels = data.get("labels");
         const image = data.get("image");
-        if (checked) data.append("assignedTo", checked);
+        if (checked) data.append("assignedTo", JSON.stringify(checked));
         data.append("dueDate", date);
         data.append("owner", user.id);
         data.append("status", "In Progress");
@@ -74,7 +74,7 @@ export default function AddToDo({ open, user, list, handleClose }) {
 
         try {
             const response = await fetch(
-                "https://thullo-backend.herokuapp.com/tasks",
+                "http://localhost:8000/tasks",
                 requestOptions
             );
             const json = await response.json();
